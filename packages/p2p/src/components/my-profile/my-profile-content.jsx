@@ -5,8 +5,9 @@ import { localize } from 'Components/i18next';
 import { my_profile_tabs } from 'Constants/my-profile-tabs';
 import { useStores } from 'Stores';
 import MyProfileForm from './my-profile-form';
-import MyProfileStats from './my-profile-stats';
+// import W from './my-profile-stats';
 import PaymentMethods from './payment-methods';
+import BlockUserList from '../advertiser-page/block-user/block-user-list';
 
 const MyProfileContent = () => {
     const { my_profile_store } = useStores();
@@ -33,7 +34,8 @@ const MyProfileContent = () => {
             </React.Fragment>
         );
     }
-    return <MyProfileStats />;
+    // return <MyProfileStats />;
+    return <BlockUserList />;
 };
 
 export default observer(MyProfileContent);
