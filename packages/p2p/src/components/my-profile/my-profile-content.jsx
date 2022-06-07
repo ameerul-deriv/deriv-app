@@ -5,9 +5,10 @@ import { localize } from 'Components/i18next';
 import { my_profile_tabs } from 'Constants/my-profile-tabs';
 import { useStores } from 'Stores';
 import MyProfileForm from './my-profile-form';
-// import W from './my-profile-stats';
+// import MyProfileStats from './my-profile-stats';
 import PaymentMethods from './payment-methods';
-import BlockUserList from '../advertiser-page/block-user/block-user-list';
+// import BlockUserList from '../advertiser-page/block-user/block-user-list.jsx';
+import BlockUserListTable from '../advertiser-page/block-user/block-user-list-table.jsx';
 
 const MyProfileContent = () => {
     const { my_profile_store } = useStores();
@@ -35,7 +36,7 @@ const MyProfileContent = () => {
         );
     }
     // return <MyProfileStats />;
-    return <BlockUserList />;
+    return <BlockUserListTable />;
 };
 
 export default observer(MyProfileContent);

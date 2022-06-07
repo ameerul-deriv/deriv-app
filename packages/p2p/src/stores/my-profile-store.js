@@ -19,6 +19,7 @@ export default class MyProfileStore extends BaseStore {
     @observable error_message = '';
     @observable form_error = '';
     @observable full_name = '';
+    @observable has_more_items_to_load = false;
     @observable is_button_loading = false;
     @observable is_cancel_add_payment_method_modal_open = false;
     @observable is_cancel_edit_payment_method_modal_open = false;
@@ -482,6 +483,11 @@ export default class MyProfileStore extends BaseStore {
     @action.bound
     setFullName(full_name) {
         this.full_name = full_name;
+    }
+
+    @action.bound
+    setHasMoreItemsToLoad(has_more_items_to_load) {
+        this.has_more_items_to_load = has_more_items_to_load;
     }
 
     @action.bound

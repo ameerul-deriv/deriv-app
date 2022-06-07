@@ -1,0 +1,25 @@
+.block-user-list-row {
+    padding: 1.6rem;
+    grid-template-columns: 1fr 1fr;
+
+    &:hover {
+        background-color: var(--general-hover);
+    }
+
+    &__button {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    &__cell {
+        align-items: center;
+        display: flex;
+
+        &--container {
+            display: flex;
+            flex-direction: column;
+            margin-left: 0.8rem;
+        }
+    }
+}
