@@ -16,7 +16,7 @@ const BlockUserListTable = () => {
                         has_more_items_to_load={my_profile_store.has_more_items_to_load}
                         items={['test', 'test2', 'test3', 'test4']}
                         keyMapperFn={item => item.id}
-                        // loadMoreRowsFn={my_profile_store.loadMoreItems}
+                        loadMoreRowsFn={my_profile_store.loadMoreItems}
                         rowRenderer={props => <BlockUserListRow {...props} />}
                     />
                 </Table.Body>
