@@ -13,6 +13,7 @@ export default class MyProfileStore extends BaseStore {
     @observable advertiser_payment_methods_error = '';
     @observable available_payment_methods = {};
     @observable balance_available = null;
+    @observable blocked_advertisers_list = [];
     @observable contact_info = '';
     @observable default_advert_description = '';
     @observable delete_error_message = '';
@@ -187,6 +188,19 @@ export default class MyProfileStore extends BaseStore {
                 this.setErrorMessage(response.error.message);
             }
             this.setIsLoading(false);
+        });
+    }
+
+    @action.bound
+    getBlockedAdvertisersList() {
+        requestWS({
+            p2p_advertiser_relations: 1,
+        }).then(response => {
+            if (!response.error) {
+                this.blocked_advertisers_list.push();
+            } else {
+                this.setErrorMessage(response.error);
+            }
         });
     }
 
@@ -453,6 +467,11 @@ export default class MyProfileStore extends BaseStore {
     @action.bound
     setBalanceAvailable(balance_available) {
         this.balance_available = balance_available;
+    }
+
+    @action.bound
+    setBlockedAdvertisrsList(blocked_advertisers_list) {
+        this.blocked_advertisers_list = blocked_advertisers_list;
     }
 
     @action.bound

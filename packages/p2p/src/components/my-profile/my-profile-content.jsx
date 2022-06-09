@@ -13,6 +13,8 @@ import BlockUserListTable from '../advertiser-page/block-user/block-user-list-ta
 const MyProfileContent = () => {
     const { my_profile_store } = useStores();
 
+    my_profile_store.getBlockedUsers();
+
     if (my_profile_store.active_tab === my_profile_tabs.AD_TEMPLATE) {
         return <MyProfileForm />;
     } else if (my_profile_store.active_tab === my_profile_tabs.PAYMENT_METHODS) {
