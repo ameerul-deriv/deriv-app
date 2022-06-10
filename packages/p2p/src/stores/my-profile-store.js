@@ -193,14 +193,16 @@ export default class MyProfileStore extends BaseStore {
 
     @action.bound
     getBlockedAdvertisersList() {
+        this.setIsLoading(true);
         requestWS({
             p2p_advertiser_relations: 1,
         }).then(response => {
             if (!response.error) {
-                this.blocked_advertisers_list.push();
+                this.setBlockedAdvertisersList(response.p2p_advertiser_relations.blocked_advertisers);
             } else {
                 this.setErrorMessage(response.error);
             }
+            this.setIsLoading(false);
         });
     }
 
@@ -348,6 +350,38 @@ export default class MyProfileStore extends BaseStore {
     }
 
     @action.bound
+    loadMoreItems({ startIndex }, is_initial_load = false) {
+        if (is_initial_load) {
+            this.setIsTableLoading(true);
+            this.setApiErrorMessage('');
+        }
+
+        const { list_item_limit } = this.root_store.general_store;
+
+        return new Promise(resolve => {
+            requestWS({
+                p2p_advertiser_relations: 1,
+                offset: startIndex,
+                limit: list_item_limit,
+            }).then(response => {
+                if (!response.error) {
+                    const { list } = response.p2p_advertiser_adverts;
+                    this.setHasMoreItemsToLoad(list.length >= list_item_limit);
+                    this.setAdverts(this.adverts.concat(list));
+                    this.setMissingPaymentMethods(!!list.find(payment_method => !payment_method.payment_method_names));
+                } else if (response.error.code === 'PermissionDenied') {
+                    this.root_store.general_store.setIsBlocked(true);
+                } else {
+                    this.setApiErrorMessage(response.error.message);
+                }
+
+                this.setIsTableLoading(false);
+                resolve();
+            });
+        });
+    }
+
+    @action.bound
     onClickDelete() {
         requestWS({
             p2p_advertiser_payment_methods: 1,
@@ -470,7 +504,7 @@ export default class MyProfileStore extends BaseStore {
     }
 
     @action.bound
-    setBlockedAdvertisrsList(blocked_advertisers_list) {
+    setBlockedAdvertisersList(blocked_advertisers_list) {
         this.blocked_advertisers_list = blocked_advertisers_list;
     }
 

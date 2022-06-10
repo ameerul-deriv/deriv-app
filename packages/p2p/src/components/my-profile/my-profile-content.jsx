@@ -5,15 +5,13 @@ import { localize } from 'Components/i18next';
 import { my_profile_tabs } from 'Constants/my-profile-tabs';
 import { useStores } from 'Stores';
 import MyProfileForm from './my-profile-form';
-// import MyProfileStats from './my-profile-stats';
+import MyProfileStats from './my-profile-stats';
 import PaymentMethods from './payment-methods';
-// import BlockUserList from '../advertiser-page/block-user/block-user-list.jsx';
-import BlockUserListTable from '../advertiser-page/block-user/block-user-list-table.jsx';
+// import BlockUserTable from '../advertiser-page/block-user/block-user-table.jsx';
+// import BlockUserRow from '../advertiser-page/block-user/block-user-row.jsx';
 
 const MyProfileContent = () => {
     const { my_profile_store } = useStores();
-
-    my_profile_store.getBlockedUsers();
 
     if (my_profile_store.active_tab === my_profile_tabs.AD_TEMPLATE) {
         return <MyProfileForm />;
@@ -27,7 +25,9 @@ const MyProfileContent = () => {
                     <MobileFullPageModal
                         body_className='payment-methods-list__modal'
                         height_offset='80px'
-                        is_modal_open={true}
+                        is_flex
+                        is_modal_open
+                        page_header_className='buy-sell__modal-header'
                         page_header_text={localize('Payment methods')}
                         pageHeaderReturnFn={() => my_profile_store.setActiveTab(my_profile_tabs.MY_STATS)}
                     >
@@ -36,9 +36,9 @@ const MyProfileContent = () => {
                 </MobileWrapper>
             </React.Fragment>
         );
+        // return <BlockUserTable />;
     }
-    // return <MyProfileStats />;
-    return <BlockUserListTable />;
+    return <MyProfileStats />;
 };
 
 export default observer(MyProfileContent);
