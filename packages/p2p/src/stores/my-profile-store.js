@@ -127,6 +127,11 @@ export default class MyProfileStore extends BaseStore {
         return list;
     }
 
+    @computed
+    get rendered_blocked_advertisers_list() {
+        return this.blocked_advertisers_list;
+    }
+
     @action.bound
     createPaymentMethod(values, { setSubmitting }) {
         setSubmitting(true);
@@ -193,16 +198,22 @@ export default class MyProfileStore extends BaseStore {
 
     @action.bound
     getBlockedAdvertisersList() {
+        const { list_item_limit } = this.root_store.general_store;
+
         this.setIsLoading(true);
-        requestWS({
-            p2p_advertiser_relations: 1,
-        }).then(response => {
-            if (!response.error) {
-                this.setBlockedAdvertisersList(response.p2p_advertiser_relations.blocked_advertisers);
-            } else {
-                this.setErrorMessage(response.error);
-            }
-            this.setIsLoading(false);
+        return new Promise(resolve => {
+            requestWS({
+                p2p_advertiser_relations: 1,
+            }).then(response => {
+                if (!response.error) {
+                    const { blocked_advertisers: list } = response.p2p_advertiser_relations;
+                    this.setBlockedAdvertisersList(list.slice(0, list_item_limit));
+                } else {
+                    this.setErrorMessage(response.error);
+                }
+                this.setIsLoading(false);
+                resolve();
+            });
         });
     }
 
@@ -350,32 +361,23 @@ export default class MyProfileStore extends BaseStore {
     }
 
     @action.bound
-    loadMoreItems({ startIndex }, is_initial_load = false) {
-        if (is_initial_load) {
-            this.setIsTableLoading(true);
-            this.setApiErrorMessage('');
-        }
-
+    loadMoreItems() {
         const { list_item_limit } = this.root_store.general_store;
 
+        this.setIsLoading(true);
         return new Promise(resolve => {
             requestWS({
                 p2p_advertiser_relations: 1,
-                offset: startIndex,
-                limit: list_item_limit,
             }).then(response => {
                 if (!response.error) {
-                    const { list } = response.p2p_advertiser_adverts;
+                    const { blocked_advertisers: list } = response.p2p_advertiser_relations;
                     this.setHasMoreItemsToLoad(list.length >= list_item_limit);
-                    this.setAdverts(this.adverts.concat(list));
-                    this.setMissingPaymentMethods(!!list.find(payment_method => !payment_method.payment_method_names));
-                } else if (response.error.code === 'PermissionDenied') {
-                    this.root_store.general_store.setIsBlocked(true);
+                    this.setBlockedAdvertisersList(this.blocked_advertisers_list.concat(list));
                 } else {
-                    this.setApiErrorMessage(response.error.message);
+                    this.setErrorMessage(response.error);
                 }
 
-                this.setIsTableLoading(false);
+                this.setIsLoading(false);
                 resolve();
             });
         });
