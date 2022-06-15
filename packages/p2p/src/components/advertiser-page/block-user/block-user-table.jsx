@@ -1,12 +1,23 @@
 import React from 'react';
-import { InfiniteDataList, Loading, Table } from '@deriv/components';
+import {
+    DesktopWrapper,
+    InfiniteDataList,
+    Loading,
+    MobileFullPageModal,
+    MobileWrapper,
+    Table,
+} from '@deriv/components';
 import { useStores } from 'Stores';
 import { observer } from 'mobx-react-lite';
 import BlockUserRow from './block-user-row.jsx';
-import { Localize } from 'Components/i18next';
+import Empty from 'Components/empty/empty.jsx';
+import { TableError } from 'Components/table/table-error.jsx';
+import { localize } from 'Components/i18next';
+import { my_profile_tabs } from 'Constants/my-profile-tabs';
+
 import './block-user.scss';
 
-const BlockUserListTable = () => {
+const BlockUserTable = () => {
     const { my_profile_store } = useStores();
 
     React.useEffect(() => {
@@ -20,29 +31,64 @@ const BlockUserListTable = () => {
         return <Loading is_fullscreen={false} />;
     }
 
+    if (my_profile_store.error_message) {
+        return <TableError message={my_profile_store.error_message} />;
+    }
+
+    if (my_profile_store.blocked_advertisers_list.length) {
+        return (
+            <React.Fragment>
+                <DesktopWrapper>
+                    <Table className='block-user__table'>
+                        <Table.Body className='block-user__table-body'>
+                            <InfiniteDataList
+                                data_list_className='block-user__data-list'
+                                has_more_items_to_load={false}
+                                items={my_profile_store.blocked_advertisers_list}
+                                keyMapperFn={item => item.id}
+                                loadMoreRowsFn={() => {}}
+                                rowRenderer={props => <BlockUserRow {...props} />}
+                            />
+                        </Table.Body>
+                    </Table>
+                </DesktopWrapper>
+                <MobileWrapper>
+                    <MobileFullPageModal
+                        body_className='block-user__modal'
+                        height_offset='80px'
+                        is_flex
+                        is_modal_open
+                        page_header_className='buy-sell__modal-header'
+                        page_header_text={localize('Blocked Advertisers')}
+                        pageHeaderReturnFn={() => my_profile_store.setActiveTab(my_profile_tabs.MY_STATS)}
+                    >
+                        <Table className='block-user__table'>
+                            <Table.Body className='block-user__table-body'>
+                                <InfiniteDataList
+                                    data_list_className='block-user__data-list'
+                                    has_more_items_to_load={false}
+                                    items={my_profile_store.blocked_advertisers_list}
+                                    keyMapperFn={item => item.id}
+                                    loadMoreRowsFn={() => {}}
+                                    rowRenderer={props => <BlockUserRow {...props} />}
+                                />
+                            </Table.Body>
+                        </Table>
+                    </MobileFullPageModal>
+                </MobileWrapper>
+            </React.Fragment>
+        );
+    }
+
+    // TODO: Replace with Empty Advertiser's Tab once Blocked Advertisers Tab is merged
     return (
-        <React.Fragment>
-            <Table className='block-user__table'>
-                <Table.Header>
-                    <Table.Row className='block-user__table-header'>
-                        <Table.Head>
-                            <Localize i18n_default_text='Advertisers' />
-                        </Table.Head>
-                    </Table.Row>
-                </Table.Header>
-                <Table.Body className='block-user__table-body'>
-                    <InfiniteDataList
-                        data_list_className='block-user__data-list'
-                        has_more_items_to_load={my_profile_store.has_more_items_to_load}
-                        items={my_profile_store.rendered_blocked_advertisers_list}
-                        keyMapperFn={item => item.id}
-                        loadMoreRowsFn={my_profile_store.getBlockedAdvertisersList}
-                        rowRenderer={props => <BlockUserRow {...props} />}
-                    />
-                </Table.Body>
-            </Table>
-        </React.Fragment>
+        <Empty
+            className='buy-sell__empty'
+            has_tabs
+            icon='IcCashierNoAds'
+            title={localize('You have no blocked advertisers')}
+        />
     );
 };
 
-export default observer(BlockUserListTable);
+export default observer(BlockUserTable);

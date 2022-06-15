@@ -4,17 +4,17 @@ import { observer } from 'mobx-react-lite';
 import { localize } from 'Components/i18next';
 import { my_profile_tabs } from 'Constants/my-profile-tabs';
 import { useStores } from 'Stores';
-import MyProfileForm from './my-profile-form';
+// import MyProfileForm from './my-profile-form';
 import MyProfileStats from './my-profile-stats';
 import PaymentMethods from './payment-methods';
-// import BlockUserTable from '../advertiser-page/block-user/block-user-table.jsx';
-// import BlockUserRow from '../advertiser-page/block-user/block-user-row.jsx';
+import BlockUserTable from '../advertiser-page/block-user/block-user-table.jsx';
 
 const MyProfileContent = () => {
     const { my_profile_store } = useStores();
 
     if (my_profile_store.active_tab === my_profile_tabs.AD_TEMPLATE) {
-        return <MyProfileForm />;
+        // return <MyProfileForm />;
+        return <BlockUserTable />;
     } else if (my_profile_store.active_tab === my_profile_tabs.PAYMENT_METHODS) {
         return (
             <React.Fragment>
@@ -36,7 +36,6 @@ const MyProfileContent = () => {
                 </MobileWrapper>
             </React.Fragment>
         );
-        // return <BlockUserTable />;
     }
     return <MyProfileStats />;
 };

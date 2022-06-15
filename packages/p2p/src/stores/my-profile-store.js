@@ -127,11 +127,6 @@ export default class MyProfileStore extends BaseStore {
         return list;
     }
 
-    @computed
-    get rendered_blocked_advertisers_list() {
-        return this.blocked_advertisers_list;
-    }
-
     @action.bound
     createPaymentMethod(values, { setSubmitting }) {
         setSubmitting(true);
@@ -198,16 +193,13 @@ export default class MyProfileStore extends BaseStore {
 
     @action.bound
     getBlockedAdvertisersList() {
-        const { list_item_limit } = this.root_store.general_store;
-
         this.setIsLoading(true);
         return new Promise(resolve => {
             requestWS({
                 p2p_advertiser_relations: 1,
             }).then(response => {
                 if (!response.error) {
-                    const { blocked_advertisers: list } = response.p2p_advertiser_relations;
-                    this.setBlockedAdvertisersList(list.slice(0, list_item_limit));
+                    this.setBlockedAdvertisersList(response.p2p_advertiser_relations.blocked_advertisers);
                 } else {
                     this.setErrorMessage(response.error);
                 }
@@ -358,29 +350,6 @@ export default class MyProfileStore extends BaseStore {
     @action.bound
     hideAddPaymentMethodForm() {
         this.setShouldShowAddPaymentMethodForm(false);
-    }
-
-    @action.bound
-    loadMoreItems() {
-        const { list_item_limit } = this.root_store.general_store;
-
-        this.setIsLoading(true);
-        return new Promise(resolve => {
-            requestWS({
-                p2p_advertiser_relations: 1,
-            }).then(response => {
-                if (!response.error) {
-                    const { blocked_advertisers: list } = response.p2p_advertiser_relations;
-                    this.setHasMoreItemsToLoad(list.length >= list_item_limit);
-                    this.setBlockedAdvertisersList(this.blocked_advertisers_list.concat(list));
-                } else {
-                    this.setErrorMessage(response.error);
-                }
-
-                this.setIsLoading(false);
-                resolve();
-            });
-        });
     }
 
     @action.bound
