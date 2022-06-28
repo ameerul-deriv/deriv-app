@@ -31,9 +31,15 @@ const OrdersUserRatingModal = ({ is_orders_user_rating_modal_open }) => {
                         star_size={25}
                     />
                     {show_recommend && (
-                        <Text color='prominent' size='xs'>
-                            <Localize i18n_default_text='Would you recommend this seller?' />
-                        </Text>
+                        <React.Fragment>
+                            <Text color='prominent' size='xs'>
+                                <Localize i18n_default_text='Would you recommend this seller?' />
+                            </Text>
+                            <div className='orders__rating--button-group'>
+                                <Button icon='IcThumbsUp' secondary small text='Yes' />
+                                <Button icon='IcThumbsDown' secondary small text='No' />
+                            </div>
+                        </React.Fragment>
                     )}
                 </div>
             </Modal.Body>
