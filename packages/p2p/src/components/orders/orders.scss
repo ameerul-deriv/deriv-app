@@ -272,4 +272,17 @@
             }
         }
     }
+
+    &__rating {
+        &-modal-body {
+            display: flex;
+            flex-direction: column;
+        }
+        &-star {
+            padding-bottom: 0.5rem;
+            > svg {
+                padding-right: 0.3rem;
+            }
+        }
+    }
 }

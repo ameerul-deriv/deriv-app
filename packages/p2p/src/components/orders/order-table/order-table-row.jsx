@@ -89,6 +89,11 @@ const OrderRow = ({ style, row: order }) => {
     const is_buy_order_type_for_user = (is_buy_order && !is_my_ad) || (is_sell_order && is_my_ad);
     const order_type = is_buy_order_type_for_user ? localize('Buy') : localize('Sell');
 
+    const onRate = event => {
+        event.stopPropagation();
+        order_store.setIsOrdersUserRatingModalOpen(true);
+    };
+
     if (isMobile()) {
         return (
             <div onClick={() => order_store.setQueryDetails(order)}>
@@ -179,7 +184,7 @@ const OrderRow = ({ style, row: order }) => {
                     {general_store.is_active_tab ? (
                         <div className='orders__table-time'>{remaining_time}</div>
                     ) : (
-                        <Button className='orders__table-button' onClick={() => {}} secondary small>
+                        <Button className='orders__table-button' onClick={e => onRate(e)} secondary small>
                             <Icon className='orders__table-icon' icon='IcFullStar' size={16} />
                             <Localize i18n_default_text='Rate' />
                         </Button>

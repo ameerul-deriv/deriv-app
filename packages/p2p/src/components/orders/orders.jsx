@@ -49,7 +49,7 @@ const Orders = observer(() => {
 
     return (
         <div className='orders'>
-            <OrdersUserRatingModal />
+            <OrdersUserRatingModal is_orders_user_rating_modal_open={order_store.is_orders_user_rating_modal_open} />
             <OrderTable />
         </div>
     );

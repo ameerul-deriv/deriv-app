@@ -23,6 +23,7 @@ export default class OrderStore {
     @observable error_message = '';
     @observable has_more_items_to_load = false;
     @observable is_loading = false;
+    @observable is_orders_user_rating_modal_open = false;
     @observable orders = [];
     @observable order_id = null;
     @observable order_payment_method_details = null;
@@ -209,6 +210,11 @@ export default class OrderStore {
     @action.bound
     setIsLoading(is_loading) {
         this.is_loading = is_loading;
+    }
+
+    @action.bound
+    setIsOrdersUserRatingModalOpen(is_orders_user_rating_modal_open) {
+        this.is_orders_user_rating_modal_open = is_orders_user_rating_modal_open;
     }
 
     @action.bound
