@@ -325,12 +325,33 @@ export default class GeneralStore extends BaseStore {
                     },
                     [this.root_store.floating_rate_store.fetchExchangeRate]
                 ),
+                override_exchange_rate_subscription: subscribeWS(
+                    {
+                        website_status: 1,
+                        subscribe: 1,
+                    },
+                    [this.updateExchangeRate]
+                ),
             };
 
             if (this.ws_subscriptions) {
                 this.setIsLoading(false);
             }
         });
+    }
+
+    @action.bound
+    updateExchangeRate(response) {
+        // console.log('update', response);
+        const { floating_rate_store } = this.root_store;
+        if (response) {
+            if (response.error) {
+                floating_rate_store.setApiErrorMessage(response.error.message);
+                this.ws_subscriptions.override_exchange_rate.unsubscribe();
+            } else {
+                floating_rate_store.setExchangeRate(response.website_status.p2p_config?.override_exchange_rate);
+            }
+        }
     }
 
     @action.bound
@@ -472,16 +493,24 @@ export default class GeneralStore extends BaseStore {
     setP2PConfig() {
         const { floating_rate_store } = this.root_store;
         requestWS({ website_status: 1 }).then(response => {
+            // console.log('config', response);
             if (!!response && response.error) {
                 floating_rate_store.setApiErrorMessage(response.error.message);
             } else {
-                const { fixed_rate_adverts, float_rate_adverts, float_rate_offset_limit, fixed_rate_adverts_end_date } =
-                    response.website_status.p2p_config;
+                const {
+                    fixed_rate_adverts,
+                    float_rate_adverts,
+                    float_rate_offset_limit,
+                    fixed_rate_adverts_end_date,
+                    override_exchange_rate,
+                } = response.website_status.p2p_config;
                 floating_rate_store.setFixedRateAdvertStatus(fixed_rate_adverts);
                 floating_rate_store.setFloatingRateAdvertStatus(float_rate_adverts);
                 floating_rate_store.setFloatRateOffsetLimit(float_rate_offset_limit);
                 floating_rate_store.setFixedRateAdvertsEndDate(fixed_rate_adverts_end_date || null);
                 floating_rate_store.setApiErrorMessage(null);
+
+                if (override_exchange_rate) floating_rate_store.setExchangeRate(override_exchange_rate);
             }
         });
     }

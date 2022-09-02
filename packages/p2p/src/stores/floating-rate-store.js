@@ -77,6 +77,7 @@ export default class FloatingRateStore extends BaseStore {
             this.current_exchange_rate = this.exchange_rate;
             this.setIsMarketRateChanged(true);
         }
+        // console.log(this.exchange_rate);
     }
 
     @action.bound
@@ -89,6 +90,8 @@ export default class FloatingRateStore extends BaseStore {
     @action.bound
     fetchExchangeRate(response) {
         const { client, ws_subscriptions } = this.root_store.general_store;
+        // console.log('fetch', response);
+        // if (ws_subscriptions.override_exchange_rate) console.log('override');
         if (response) {
             if (response.error) {
                 this.setApiErrorMessage(response.error.message);
@@ -97,6 +100,20 @@ export default class FloatingRateStore extends BaseStore {
                 const { rates } = response.exchange_rates;
                 this.setExchangeRate(rates[client?.local_currency_config?.currency]);
                 this.setApiErrorMessage(null);
+            }
+        }
+    }
+
+    @action.bound
+    updateExchangeRate(response) {
+        // console.log('update', response);
+        const { ws_subscriptions } = this.root_store.general_store;
+        if (response) {
+            if (response.error) {
+                this.setApiErrorMessage(response.error.message);
+                ws_subscriptions.override_exchange_rate.unsubscribe();
+            } else {
+                this.setExchangeRate(response.website_status.p2p_config?.override_exchange_rate);
             }
         }
     }
