@@ -4,7 +4,7 @@ import { Button, HintBox, InfiniteDataList, Loading, Modal, Table, Text } from '
 import { isDesktop, isMobile } from '@deriv/shared';
 import { observer } from 'mobx-react-lite';
 import { localize, Localize } from 'Components/i18next';
-import Empty from 'Components/empty/empty.jsx';
+import Empty from 'Components/empty';
 import ToggleAds from 'Components/my-ads/toggle-ads.jsx';
 import { TableError } from 'Components/table/table-error.jsx';
 import { ad_type } from 'Constants/floating-rate';

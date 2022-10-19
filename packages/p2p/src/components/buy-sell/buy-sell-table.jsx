@@ -5,7 +5,7 @@ import { isDesktop } from '@deriv/shared';
 import { reaction } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import { localize, Localize } from 'Components/i18next';
-import Empty from 'Components/empty/empty.jsx';
+import Empty from 'Components/empty';
 import { TableError } from 'Components/table/table-error.jsx';
 import { useStores } from 'Stores';
 import BuySellRow from './buy-sell-row.jsx';

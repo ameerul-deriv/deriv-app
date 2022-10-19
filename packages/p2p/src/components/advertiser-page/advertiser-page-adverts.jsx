@@ -5,7 +5,7 @@ import { isDesktop, isMobile } from '@deriv/shared';
 import { observer } from 'mobx-react-lite';
 import { localize, Localize } from 'Components/i18next';
 import { useStores } from 'Stores';
-import Empty from 'Components/empty/empty.jsx';
+import Empty from 'Components/empty';
 import AdvertiserPageRow from './advertiser-page-row.jsx';
 import './advertiser-page.scss';
 
