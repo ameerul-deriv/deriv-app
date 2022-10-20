@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { localize, Localize } from 'Components/i18next';
 import Empty from 'Components/empty';
 import ToggleAds from 'Components/my-ads/toggle-ads.jsx';
-import { TableError } from 'Components/table/table-error.jsx';
+import { TableError } from 'Components/table-error';
 import { ad_type } from 'Constants/floating-rate';
 import { useStores } from 'Stores';
 import { generateErrorDialogTitle } from 'Utils/adverts';

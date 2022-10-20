@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { TableError } from '../table-error.jsx';
+import TableError from '../table-error';
 
 describe('<TableError/>', () => {
     it('should render message passed as props', () => {

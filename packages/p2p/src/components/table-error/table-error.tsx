@@ -1,14 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './table.scss';
+import './table-error.scss';
 import { Text } from '@deriv/components';
 
-export const TableError = ({ message }) => (
+type TTableErrorProps = {
+    message: string;
+};
+
+const TableError = ({ message }: TTableErrorProps) => (
     <Text as='p' color='loss-danger' size='xs' className='dp2p-table-error'>
         {message}
     </Text>
 );
 
-TableError.propTypes = {
-    message: PropTypes.string,
-};
+export default TableError;
