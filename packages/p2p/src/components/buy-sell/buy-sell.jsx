@@ -21,6 +21,7 @@ const BuySell = () => {
     React.useEffect(() => {
         const disposeIsListedReaction = buy_sell_store.registerIsListedReaction();
         const disposeAdvertIntervalReaction = buy_sell_store.registerAdvertIntervalReaction();
+        buy_sell_store.setLocalCurrency(buy_sell_store.selected_local_currency);
 
         return () => {
             disposeIsListedReaction();
