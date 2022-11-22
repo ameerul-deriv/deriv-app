@@ -14,7 +14,7 @@ jest.mock('Stores', () => ({
 }));
 
 jest.mock('Components/misc/toggle-container.jsx', () => jest.fn(() => <div>Toggle</div>));
-jest.mock('Components/orders/order-table/order-table-content.jsx', () => jest.fn(() => <div>Order Table Content</div>));
+jest.mock('Pages/orders/order-table/order-table-content.jsx', () => jest.fn(() => <div>Order Table Content</div>));
 
 jest.mock('@deriv/components', () => ({
     ...jest.requireActual('@deriv/components'),

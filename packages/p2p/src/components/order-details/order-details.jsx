@@ -4,7 +4,7 @@ import { Button, HintBox, Icon, Text, ThemedScrollbars } from '@deriv/components
 import { formatMoney, isDesktop, isMobile } from '@deriv/shared';
 import { observer } from 'mobx-react-lite';
 import { Localize, localize } from 'Components/i18next';
-import Chat from 'Components/orders/chat/chat.jsx';
+import Chat from 'Pages/orders/chat/chat.jsx';
 import EmailVerificationModal from 'Components/email-verification-modal';
 import RatingModal from 'Components/rating-modal';
 import StarRating from 'Components/star-rating';

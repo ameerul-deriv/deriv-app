@@ -7,8 +7,8 @@ import { observer } from 'mobx-react-lite';
 import { Localize, localize } from 'Components/i18next';
 import { TableError } from 'Components/table/table-error.jsx';
 import Empty from 'Components/empty/empty.jsx';
-import OrderRow from 'Components/orders/order-table/order-table-row.jsx';
-import OrderTableHeader from 'Components/orders/order-table/order-table-header.jsx';
+import OrderRow from 'Pages/orders/order-table/order-table-row.jsx';
+import OrderTableHeader from 'Pages/orders/order-table/order-table-header.jsx';
 import { useStores } from 'Stores';
 import { createExtendedOrderDetails } from 'Utils/orders';
 

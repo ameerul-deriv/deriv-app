@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { Button, Loading, Text } from '@deriv/components';
 import { observer } from 'mobx-react-lite';
 import { Localize, localize } from 'Components/i18next';
-import ChatHeader from 'Components/orders/chat/chat-header.jsx';
-import ChatMessages from 'Components/orders/chat/chat-messages.jsx';
-import ChatFooter from 'Components/orders/chat/chat-footer.jsx';
-import ChatWrapper from 'Components/orders/chat/chat-wrapper.jsx';
+import ChatHeader from 'Pages/orders/chat/chat-header.jsx';
+import ChatMessages from 'Pages/orders/chat/chat-messages.jsx';
+import ChatFooter from 'Pages/orders/chat/chat-footer.jsx';
+import ChatWrapper from 'Pages/orders/chat/chat-wrapper.jsx';
 import { useStores } from 'Stores';
-import 'Components/orders/chat/chat.scss';
+import 'Pages/orders/chat/chat.scss';
 
 const Chat = observer(() => {
     const { sendbird_store } = useStores();

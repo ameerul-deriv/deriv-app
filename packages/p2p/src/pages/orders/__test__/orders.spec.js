@@ -24,7 +24,7 @@ jest.mock('@deriv/components', () => ({
     useSafeState: jest.fn().mockReturnValue([{}, jest.fn()]),
 }));
 
-jest.mock('Components/orders/order-table/order-table.jsx', () => jest.fn(() => <div>Order Table</div>));
+jest.mock('Pages/orders/order-table/order-table.jsx', () => jest.fn(() => <div>Order Table</div>));
 
 jest.mock('Components/order-details/order-details.jsx', () => jest.fn(() => <div>Order Details</div>));
 

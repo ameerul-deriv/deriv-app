@@ -5,7 +5,7 @@ import { isMobile } from '@deriv/shared';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import { localize, Localize } from 'Components/i18next';
-import ChatFooterIcon from 'Components/orders/chat/chat-footer-icon.jsx';
+import ChatFooterIcon from 'Pages/orders/chat/chat-footer-icon.jsx';
 import { useStores } from 'Stores';
 import ChatMessage from 'Utils/chat-message';
 

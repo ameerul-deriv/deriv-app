@@ -10,7 +10,7 @@ import { localize } from 'Components/i18next';
 import MyAds from 'Components/my-ads/my-ads.jsx';
 import MyProfile from 'Components/my-profile';
 import NicknameForm from 'Components/nickname-form';
-import Orders from 'Components/orders/orders.jsx';
+import Orders from 'Pages/orders/orders.jsx';
 import TemporarilyBarredHint from 'Components/temporarily-barred-hint';
 import Verification from 'Components/verification/verification.jsx';
 
