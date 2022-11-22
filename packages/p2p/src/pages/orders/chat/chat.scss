@@ -30,7 +30,7 @@
         }
     }
 
-    @import './chat-header.scss';
-    @import './chat-messages.scss';
-    @import './chat-footer.scss';
+    @import './chat-header/chat-header.scss';
+    @import './chat-messages/chat-messages.scss';
+    @import './chat-footer/chat-footer.scss';
 }

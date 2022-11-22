@@ -4,7 +4,7 @@ import { Icon, MobileFullPageModal, ThemedScrollbars } from '@deriv/components';
 import { isMobile } from '@deriv/shared';
 import PageReturn from 'Components/page-return/page-return.jsx';
 import { useStores } from 'Stores';
-import OrderDetailsFooter from 'Components/order-details/order-details-footer.jsx';
+import OrderDetailsFooter from '../order-details-footer/order-details-footer';
 
 const OrderDetailsWrapper = ({ children, page_title }) => {
     const { order_store, sendbird_store } = useStores();

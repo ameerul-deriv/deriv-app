@@ -1,7 +1,7 @@
 import React from 'react';
 import { useStores } from 'Stores';
 import { fireEvent, render, screen } from '@testing-library/react';
-import OrderDetailsFooter from '../order-details-footer.jsx';
+import OrderDetailsFooter from '../order-details-footer/order-details-footer.jsx';
 
 const mock_order_store = {
     is_buy_order: false,

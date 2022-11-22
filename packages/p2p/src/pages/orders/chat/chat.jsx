@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { Button, Loading, Text } from '@deriv/components';
 import { observer } from 'mobx-react-lite';
 import { Localize, localize } from 'Components/i18next';
-import ChatHeader from 'Pages/orders/chat/chat-header.jsx';
-import ChatMessages from 'Pages/orders/chat/chat-messages.jsx';
-import ChatFooter from 'Pages/orders/chat/chat-footer.jsx';
-import ChatWrapper from 'Pages/orders/chat/chat-wrapper.jsx';
+import ChatHeader from 'Pages/orders/chat/chat-header';
+import ChatMessages from 'Pages/orders/chat/chat-messages';
+import ChatFooter from 'Pages/orders/chat/chat-footer';
+import ChatWrapper from 'Pages/orders/chat/chat-wrapper';
 import { useStores } from 'Stores';
 import 'Pages/orders/chat/chat.scss';
 

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { Text, ThemedScrollbars } from '@deriv/components';
 import { formatMilliseconds } from '@deriv/shared';
 import { observer } from 'mobx-react-lite';
-import ChatMessageReceipt from 'Pages/orders/chat/chat-message-receipt.jsx';
-import ChatMessageText from 'Pages/orders/chat/chat-message-text.jsx';
+import ChatMessageReceipt from './chat-message-receipt.jsx';
+import ChatMessageText from './chat-message-text.jsx';
 import { useStores } from 'Stores';
 import ChatMessage from 'Utils/chat-message';
 

@@ -4,27 +4,27 @@ import { Button, HintBox, Icon, Text, ThemedScrollbars } from '@deriv/components
 import { formatMoney, isDesktop, isMobile } from '@deriv/shared';
 import { observer } from 'mobx-react-lite';
 import { Localize, localize } from 'Components/i18next';
-import Chat from 'Pages/orders/chat/chat.jsx';
+import Chat from 'Pages/orders/chat';
 import EmailVerificationModal from 'Components/email-verification-modal';
 import RatingModal from 'Components/rating-modal';
 import StarRating from 'Components/star-rating';
 import UserRatingButton from 'Components/user-rating-button';
-import OrderDetailsFooter from 'Components/order-details/order-details-footer.jsx';
-import OrderDetailsTimer from 'Components/order-details/order-details-timer.jsx';
-import OrderInfoBlock from 'Components/order-details/order-info-block.jsx';
-import OrderDetailsWrapper from 'Components/order-details/order-details-wrapper.jsx';
+import OrderDetailsFooter from 'Pages/orders/order-details/order-details-footer';
+import OrderDetailsTimer from 'Pages/orders/order-details/order-details-timer';
+import OrderInfoBlock from 'Pages/orders/order-details/order-info-block';
+import OrderDetailsWrapper from 'Pages/orders/order-details/order-details-wrapper';
 import P2PAccordion from 'Components/p2p-accordion/p2p-accordion.jsx';
 import { useStores } from 'Stores';
-import PaymentMethodAccordionHeader from './payment-method-accordion-header.jsx';
-import PaymentMethodAccordionContent from './payment-method-accordion-content.jsx';
-import MyProfileSeparatorContainer from '../my-profile/my-profile-separator-container';
+import PaymentMethodAccordionHeader from './payment-method-accordion-header';
+import PaymentMethodAccordionContent from './payment-method-accordion-content';
+import MyProfileSeparatorContainer from 'Components/my-profile/my-profile-separator-container';
 import { setDecimalPlaces, removeTrailingZeros, roundOffDecimal } from 'Utils/format-value';
-import 'Components/order-details/order-details.scss';
-import LoadingModal from '../loading-modal';
-import InvalidVerificationLinkModal from '../invalid-verification-link-modal';
-import EmailLinkBlockedModal from '../email-link-blocked-modal';
-import EmailLinkVerifiedModal from '../email-link-verified-modal';
+import LoadingModal from 'Components/loading-modal';
+import InvalidVerificationLinkModal from 'Components/invalid-verification-link-modal';
+import EmailLinkBlockedModal from 'Components/email-link-blocked-modal';
+import EmailLinkVerifiedModal from 'Components/email-link-verified-modal';
 import { getDateAfterHours } from 'Utils/date-time';
+import 'Pages/orders/order-details/order-details.scss';
 
 const OrderDetails = observer(() => {
     const { general_store, order_store, sendbird_store } = useStores();
@@ -113,7 +113,7 @@ const OrderDetails = observer(() => {
     const rate_amount = removeTrailingZeros(formatMoney(local_currency, rate, true, 6));
 
     const is_recommended_by_user =
-        general_store.client?.loginid === client_details?.loginid
+        general_store?.client?.loginid === client_details?.loginid
             ? advertiser_details?.is_recommended
             : client_details?.is_recommended;
 

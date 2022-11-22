@@ -4,7 +4,7 @@ import { isMobile } from '@deriv/shared';
 import { observer } from 'mobx-react-lite';
 import PropTypes from 'prop-types';
 import { useStores } from 'Stores';
-import ChatHeader from './chat-header.jsx';
+import ChatHeader from '../chat-header';
 
 const ChatWrapper = observer(({ children, is_modal_open }) => {
     const { sendbird_store, order_store } = useStores();

@@ -76,7 +76,7 @@ const OrderDetailsConfirmModal = ({
                     />
                 </Modal.Body>
                 <Modal.Footer>
-                    {order_details_store.error_message && <FormError message={order_details_store.error_message} />}
+                    {order_details_store?.error_message && <FormError message={order_details_store?.error_message} />}
                     <Button.Group>
                         <Button secondary type='button' onClick={hideConfirmOrderModal} large>
                             {is_buy_order_for_user ? (

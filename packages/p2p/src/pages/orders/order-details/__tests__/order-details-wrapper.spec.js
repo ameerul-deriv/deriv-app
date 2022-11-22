@@ -2,7 +2,7 @@ import React from 'react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { useStores } from 'Stores';
 import { isMobile } from '@deriv/shared';
-import OrderDetailsWrapper from '../order-details-wrapper.jsx';
+import OrderDetailsWrapper from '../order-details-wrapper';
 
 jest.mock('Stores', () => ({
     ...jest.requireActual('Stores'),

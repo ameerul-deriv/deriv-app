@@ -4,9 +4,9 @@ import { Button } from '@deriv/components';
 import { observer } from 'mobx-react-lite';
 import { Localize } from 'Components/i18next';
 import { useStores } from 'Stores';
-import OrderDetailsCancelModal from './order-details-cancel-modal.jsx';
-import OrderDetailsComplainModal from './order-details-complain-modal.jsx';
-import OrderDetailsConfirmModal from './order-details-confirm-modal.jsx';
+import OrderDetailsCancelModal from 'Components/order-details/order-details-cancel-modal.jsx';
+import OrderDetailsComplainModal from 'Components/order-details/order-details-complain-modal.jsx';
+import OrderDetailsConfirmModal from 'Components/order-details/order-details-confirm-modal.jsx';
 
 const OrderDetailsFooter = observer(() => {
     const { order_store } = useStores();

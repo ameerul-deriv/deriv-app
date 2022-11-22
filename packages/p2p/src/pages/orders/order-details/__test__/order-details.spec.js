@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { useStores } from 'Stores';
-import OrderDetails from '../order-details.jsx';
+import OrderDetails from '../order-details';
 
 const mock_order_info = {
     account_currency: 'USD',
@@ -67,11 +67,11 @@ jest.mock('@deriv/shared', () => ({
     isDesktop: jest.fn(() => true),
 }));
 
-jest.mock('Components/order-details/order-details-footer.jsx', () => jest.fn(() => <div>Order details footer</div>));
+jest.mock('Pages/orders/order-details/order-details-footer', () => jest.fn(() => <div>Order details footer</div>));
 
-jest.mock('Components/order-details/order-info-block.jsx', () => jest.fn(() => <div>Order Info Block</div>));
+jest.mock('Pages/orders/order-details/order-info-block', () => jest.fn(() => <div>Order Info Block</div>));
 
-jest.mock('Components/orders/chat/chat.jsx', () => jest.fn(() => <div>Chat section</div>));
+jest.mock('Pages/orders/chat', () => jest.fn(() => <div>Chat section</div>));
 
 jest.mock('Components/p2p-accordion/p2p-accordion.jsx', () => jest.fn(() => <div>Payment methods listed</div>));
 
