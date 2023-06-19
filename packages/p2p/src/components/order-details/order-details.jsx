@@ -110,17 +110,18 @@ const OrderDetails = observer(() => {
             handleChatChannelCreation();
         }
 
+        setP2POrderProps({
+            order_id: order_store.order_id,
+            setP2POrderTab: general_store.setP2POrderTab,
+            setIsRatingModalOpen: is_open => (is_open ? showRatingModal() : hideModal()),
+        });
+
         return () => {
             disposeListeners();
             disposeReactions();
             order_store.setOrderPaymentMethodDetails(undefined);
             order_store.setOrderId(null);
             order_store.setActiveOrder(null);
-            setP2POrderProps({
-                order_id: order_store.order_id,
-                setP2POrderTab: general_store.setP2POrderTab,
-                setIsRatingModalOpen: is_open => (is_open ? showRatingModal : hideModal),
-            });
             history.replace({
                 search: '',
                 hash: location.hash,
@@ -128,6 +129,7 @@ const OrderDetails = observer(() => {
             buy_sell_store.setIsCreateOrderSubscribed(false);
             buy_sell_store.unsubscribeCreateOrder();
             sendbird_store.setHasChatError(false);
+            sendbird_store.setChatMessages([]);
         };
     }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
