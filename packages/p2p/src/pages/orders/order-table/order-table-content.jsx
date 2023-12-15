@@ -11,6 +11,7 @@ import P2pEmpty from 'Components/p2p-empty';
 import OrderRow from 'Pages/orders/order-table/order-table-row.jsx';
 import OrderTableHeader from 'Pages/orders/order-table/order-table-header.jsx';
 import { useStores } from 'Stores';
+import { order_list } from 'Constants/order-list';
 import { createExtendedOrderDetails } from 'Utils/orders';
 
 const ContentWrapper = ({ children }) => {
@@ -26,6 +27,13 @@ const OrderTableContent = () => {
         client: { loginid },
     } = useStore();
     const history = useHistory();
+
+    const is_active_tab = general_store.order_table_type === order_list.ACTIVE;
+
+    const getNoOrderMessage = () => {
+        if (is_active_tab) return localize('You have no active orders.');
+        return localize("You've made no transactions of this type during this period.");
+    };
 
     React.useEffect(
         () =>
@@ -72,7 +80,13 @@ const OrderTableContent = () => {
     }
 
     return (
-        <P2pEmpty has_tabs icon='IcNoOrder' title={localize('You have no orders.')}>
+        <P2pEmpty
+            has_tabs
+            icon={is_active_tab ? 'IcNoOrder' : 'IcStatement'}
+            title={getNoOrderMessage()}
+            is_disabled={!is_active_tab}
+            {...(!is_active_tab && { max_width: '100%', weight: 'normal' })}
+        >
             {general_store.is_active_tab && (
                 <Button
                     primary

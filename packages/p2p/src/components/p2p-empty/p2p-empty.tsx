@@ -7,15 +7,33 @@ type TP2pEmptyProps = {
     children: React.ReactNode;
     has_tabs?: boolean;
     icon: string;
+    is_disabled?: boolean;
+    max_width?: string;
     title: string;
+    weight?: string;
 };
 
-const P2pEmpty = ({ className, children, has_tabs = false, icon, title }: TP2pEmptyProps) => {
+const P2pEmpty = ({
+    className,
+    children,
+    has_tabs = false,
+    icon,
+    is_disabled = false,
+    max_width = '628px',
+    title,
+    weight = 'bold',
+}: TP2pEmptyProps) => {
+    const is_disabled_color = is_disabled ? 'disabled' : '';
     return (
-        <div className={classNames(className, 'p2p-empty', { 'p2p-empty--no-tabs': !has_tabs })}>
-            <Icon icon={icon} className='p2p-empty-icon' size={128} />
+        <div
+            className={classNames(className, 'p2p-empty', { 'p2p-empty--no-tabs': !has_tabs })}
+            style={{ maxWidth: max_width }}
+        >
+            <Icon className='p2p-empty-icon' color={is_disabled_color} icon={icon} size={128} />
             <div className='p2p-empty-title'>
-                <Text weight='bold'>{title}</Text>
+                <Text color={is_disabled_color} weight={weight}>
+                    {title}
+                </Text>
             </div>
             {children}
         </div>
